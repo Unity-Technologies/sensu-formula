@@ -14,7 +14,7 @@ include:
     - dataset:
         api:
           host: {{ sensu.api.host }}
-          password: {{ sensu.api.password }}
+          #password: {{ sensu.api.password }}
           port: {{ sensu.api.port }}
-          user: {{ sensu.api.user }}
+          #user: {{ sensu.api.user }}
 

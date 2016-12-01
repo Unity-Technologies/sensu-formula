@@ -1,0 +1,8 @@
+{
+  "cph_mailer": {
+      "mail_from": "sensu@unity3d.com",
+      "mail_to": "etops@unity3d.com",
+      "smtp_address": "mailsrv01.hq.unity3d.com",
+      "smtp_port": 25
+  }
+}

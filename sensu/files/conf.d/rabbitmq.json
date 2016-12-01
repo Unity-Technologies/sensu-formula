@@ -1,0 +1,10 @@
+{% set password = pillar.sensu.password %}
+{
+  "rabbitmq": {
+    "host": "{{ pillar.sensu.rabbitmq.host }}",
+    "port": 5672,
+    "user": "{{ pillar.sensu.rabbitmq.user }}",
+    "password": "{{ password }}",
+    "vhost": "/sensu"
+  }
+}

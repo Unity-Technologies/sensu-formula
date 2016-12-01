@@ -21,6 +21,11 @@ uchiwa:
         uchiwa:
           {{ sensu.uchiwa }}
 
+  cmd.run:
+    - name: setcap 'cap_net_bind_service=+ep' /opt/uchiwa/bin/uchiwa
+    - unless: getcap /opt/uchiwa/bin/uchiwa | grep 'cap_net_bind_service+ep'
+    - require:
+      - pkg: uchiwa
   service.running:
     - enable: True
     - require:

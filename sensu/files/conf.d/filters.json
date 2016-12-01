@@ -1,0 +1,13 @@
+{
+  "filters": {
+    "call_pagerduty": {
+      "negate": false,
+      "attributes": {
+        "client": {
+          "call_pagerduty": true
+        }
+      }
+    }
+  }
+}
+

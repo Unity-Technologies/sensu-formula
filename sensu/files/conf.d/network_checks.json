@@ -1,0 +1,29 @@
+{% from "sensu/service_map.jinja" import services with context -%}
+{
+  "checks": {
+    "interface_metrics": {
+      "type": "metric",
+      "handlers": ["metrics"],
+      "command": "/opt/sensu/embedded/bin/metrics-interface.rb --exclude-interface lo",
+      "interval": 60,
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+    },
+    "ping_google": {
+      "handlers": ["cph_mail", "slack"],
+      "command": "/opt/sensu/embedded/bin/check-ping.rb -h 8.8.8.8 -c 10 --report",
+      "interval": 60,
+      "occurrences": 1,
+      "call_pagerduty": false,
+      "subscribers": [ "roundrobin:all_roundrobin" ]
+    },
+    "ping_cph_mailserver": {
+      "handlers": ["cph_mail", "slack"],
+      "command": "/opt/sensu/embedded/bin/check-ping.rb -h mailsrv01.hq.unity3d.com -c 10 --report",
+      "interval": 60,
+      "occurrences": 1,
+      "call_pagerduty": false,
+      "subscribers": [ "roundrobin:all_roundrobin" ]
+    }
+  }
+}

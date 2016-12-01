@@ -1,0 +1,29 @@
+{% from "sensu/service_map.jinja" import services with context -%}
+{
+  "checks": {
+    "disk_check": {
+      "handlers": ["default", "pagerduty", "slack"],
+      "command": "/opt/sensu/embedded/bin/check-disk-usage.rb -w 85 -c 90 -i /var/lib/ureadahead/debugfs/tracing",
+      "interval": 60,
+      "occurrences": 5,
+      "call_pagerduty": false,
+      "subscribers": [ "all" ]
+    },
+    "disk_iostat_metrics": {
+      "handlers": ["metrics"],
+      "command": "/opt/sensu/embedded/bin/metrics-disk.rb",
+      "interval": 60,
+      "type": "metric",
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+    },
+    "disk_use_metrics": {
+      "handlers": ["metrics"],
+      "command": "/opt/sensu/embedded/bin/metrics-disk-usage.rb",
+      "interval": 60,
+      "type": "metric",
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+    }
+  }
+}

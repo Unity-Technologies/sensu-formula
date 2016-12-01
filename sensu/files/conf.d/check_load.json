@@ -1,0 +1,23 @@
+{% from "sensu/service_map.jinja" import services with context -%}
+{
+  "checks": {
+    "load_check": {
+      "handlers": ["default", "pagerduty", "slack" ],
+      "command": "/opt/sensu/embedded/bin/check-load.rb -w 10,20,30 -c 25,50,75",
+      "interval": 60,
+      "occurrences": 5,
+      "call_pagerduty": false,
+      "subscribers": [ "all" ]
+    },
+    "load_metrics": {
+      "type": "metric",
+      "command": "/opt/sensu/embedded/bin/metrics-load.rb",
+      "handlers": [
+        "metrics"
+      ],
+      "interval": 60,
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+    }
+  }
+}

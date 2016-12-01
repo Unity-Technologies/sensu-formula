@@ -2,9 +2,11 @@
 {
   "checks": {
     "cron_check": {
-      "handlers": ["default"],
+      "handlers": ["default", "pagerduty", "slack"],
       "command": "/etc/sensu/plugins/check-procs.rb -p {{ services.cron }} -C 1 ",
       "interval": 60,
+      "occurrences": 3,
+      "call_pagerduty": false,
       "subscribers": [ "all" ]
     }
   }

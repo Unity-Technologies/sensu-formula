@@ -1,0 +1,33 @@
+{% from "sensu/service_map.jinja" import services with context -%}
+{
+  "checks": {
+    "memory_check": {
+      "handlers": ["default", "pagerduty", "slack" ],
+      "command": "/opt/sensu/embedded/bin/check-memory-percent.rb -w 70 -c 80",
+      "interval": 60,
+      "occurrences": 3,
+      "call_pagerduty": false,
+      "subscribers": [ "all" ]
+    },
+    "memory_pcnt_metric": {
+      "type": "metric",
+      "command": "/opt/sensu/embedded/bin/metrics-memory-percent.rb",
+      "handlers": [
+        "metrics"
+      ],
+      "interval": 60,
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+     },
+    "memory_metric": {
+      "type": "metric",
+      "command": "/opt/sensu/embedded/bin/metrics-memory.rb",
+      "handlers": [
+        "metrics"
+      ],
+      "interval": 60,
+      "time_precision": "s",
+      "subscribers": [ "all" ]
+     }
+  }
+}
