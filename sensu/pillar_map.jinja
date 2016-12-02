@@ -7,7 +7,7 @@
         'client': {
             'embedded_ruby': True,
             'nagios_plugins': True,
-            'name': salt['grains.get']('fqdn'),
+            'name': salt['grains.get']('id'),
             'address': salt['grains.get']('ip_interfaces:eth0')[0],
             'subscriptions': ['all'],
             'safe_mode': False
