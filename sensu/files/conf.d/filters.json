@@ -7,7 +7,18 @@
           "call_pagerduty": true
         }
       }
+    },
+    "notify_resolve": {
+      "negate": true,
+      "attributes": {
+        "check": {
+          "status": 0,
+          "notify_resolve": false
+        } 
+      }
     }
   }
 }
+
+
 

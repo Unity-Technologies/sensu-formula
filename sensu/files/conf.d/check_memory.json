@@ -3,7 +3,7 @@
   "checks": {
     "memory_check": {
       "handlers": ["default", "pagerduty", "slack" ],
-      "command": "/opt/sensu/embedded/bin/check-memory-percent.rb -w 70 -c 80",
+      "command": "/opt/sensu/embedded/bin/check-memory-percent.rb -w :::disk.warning|80::: -c :::disk.critical|90:::",
       "interval": 60,
       "occurrences": 3,
       "call_pagerduty": false,

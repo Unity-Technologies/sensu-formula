@@ -15,14 +15,16 @@
       "interval": 60,
       "occurrences": 1,
       "call_pagerduty": false,
+      "notify_resolve": false,
       "subscribers": [ "roundrobin:all_roundrobin" ]
     },
-    "ping_cph_mailserver": {
+    "ping_cph_gateway": {
       "handlers": ["cph_mail", "slack"],
-      "command": "/opt/sensu/embedded/bin/check-ping.rb -h mailsrv01.hq.unity3d.com -c 10 --report",
+      "command": "/opt/sensu/embedded/bin/check-ping.rb -h 10.45.8.1 -c 10 --report",
       "interval": 60,
       "occurrences": 1,
       "call_pagerduty": false,
+      "notify_resolve": false,
       "subscribers": [ "roundrobin:all_roundrobin" ]
     }
   }
