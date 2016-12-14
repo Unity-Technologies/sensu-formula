@@ -3,7 +3,7 @@
     "call_pagerduty": {
       "negate": false,
       "attributes": {
-        "client": {
+        "check": {
           "call_pagerduty": true
         }
       }
