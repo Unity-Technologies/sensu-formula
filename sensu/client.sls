@@ -31,6 +31,9 @@ sensu_enable_windows_service:
     - mode: 644
     {% endif %}
     - makedirs: True
+    {% if salt['pillar.get']("sensu:custom_clients:" + grains.id, False) %}
+    - dataset_pillar: sensu:custom_clients:{{ grains.id }}
+    {% else %}
     - dataset:
         client:
           name: {{ sensu.client.name }}
@@ -46,6 +49,7 @@ sensu_enable_windows_service:
           {% if sensu.client.get("redact") %}
           redact: {{ sensu.client.redact }}
           {% endif %}
+    {% endif %}
     - require:
       - pkg: sensu
 
@@ -129,3 +133,4 @@ sensu_checks_file:
       - service: sensu-client
 
 {%- endif %}
+
