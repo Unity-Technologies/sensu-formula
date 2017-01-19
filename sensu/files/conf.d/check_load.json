@@ -3,7 +3,7 @@
   "checks": {
     "load_check": {
       "handlers": ["default", "pagerduty", "slack" ],
-      "command": "/opt/sensu/embedded/bin/check-load.rb -w 10,20,30 -c 25,50,75",
+      "command": "/opt/sensu/embedded/bin/check-load.rb -p -w 10,20,30 -c 25,50,75",
       "interval": 60,
       "occurrences": 5,
       "call_pagerduty": false,
