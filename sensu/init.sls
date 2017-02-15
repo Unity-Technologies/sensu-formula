@@ -22,8 +22,13 @@ sensu:
     - require_in:
       - pkg: sensu
   {% endif %}
+  {% if grains['os_family'] == 'Windows' and pillar.sensu.client.get('use_chocolatey', False) %}
+  chocolatey.installed:
+    - source: {{ pillar.sensu.client.chocolatey_repo }}
+  {% else %}
   pkg:
     - installed
+  {% endif %}
 
 
 {% if grains['os_family'] != 'Windows' %}

@@ -1,5 +1,9 @@
 {% set sensu = salt['grains.filter_by']({
     'default': {
+        'pkg': {
+            'use_chocolatey': False,
+            'chocolatey_repo': None
+        },
         'transport': {
             'name': 'rabbitmq',
             'reconnect_on_error': 'true',

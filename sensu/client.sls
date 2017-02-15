@@ -12,7 +12,7 @@ include:
     - source: salt://sensu/files/windows/sensu-client.xml
     - template: jinja
     - require:
-      - pkg: sensu
+      - sls: sensu
 sensu_install_dotnet35:
   cmd.run:
     - name: 'powershell.exe "Import-Module ServerManager;Add-WindowsFeature Net-Framework-Core"'
@@ -51,7 +51,7 @@ sensu_enable_windows_service:
           {% endif %}
     {% endif %}
     - require:
-      - pkg: sensu
+      - sls: sensu
 
 /etc/sensu/plugins:
   file.recurse:
@@ -60,7 +60,7 @@ sensu_enable_windows_service:
     - file_mode: 555
     {% endif %}
     - require:
-      - pkg: sensu
+      - sls: sensu
     - require_in:
       - service: sensu-client
     - watch_in:
@@ -128,7 +128,7 @@ sensu_checks_file:
         checks: {{ salt['pillar.get']('sensu:checks') }}
     - formatter: json
     - require:
-      - pkg: sensu
+      - sls: sensu
     - watch_in:
       - service: sensu-client
 
