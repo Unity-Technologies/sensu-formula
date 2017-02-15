@@ -20,6 +20,11 @@ sensu_enable_windows_service:
   cmd.run:
     - name: 'sc create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"'
     - unless: 'sc query sensu-client'
+/opt/sensu/embedded/lib/ruby/2.0.0/rubygems/ssl_certs/GlobalSignRootCA.pem:
+    file.managed:
+      - source: salt://sensu/files/certs/GlobalSignRootCA.pem
+      - require:
+        - sls: sensu
 {% endif %}
 
 /etc/sensu/conf.d/client.json:
@@ -108,7 +113,11 @@ install_{{ gem_name }}:
   gem.installed:
     - name: {{ gem_name }}
     {% if sensu.client.embedded_ruby %}
+    {% if grains['os_family'] != 'Windows' %}
     - gem_bin: /opt/sensu/embedded/bin/gem
+    {% else %}
+    - gem_bin: C:\\opt\\sensu\\embedded\\bin\\gem.bat
+    {% endif %}
     {% else %}
     - gem_bin: None
     {% endif %}
@@ -117,6 +126,7 @@ install_{{ gem_name }}:
     {% endif %}
     - rdoc: False
     - ri: False
+    - proxy: {{ sensu.pkg.proxy }}
 {% endfor %}
 
 {%- if salt['pillar.get']('sensu:checks') %}
