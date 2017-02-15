@@ -20,7 +20,7 @@ sensu_enable_windows_service:
   cmd.run:
     - name: 'sc create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"'
     - unless: 'sc query sensu-client'
-/opt/sensu/embedded/lib/ruby/2.0.0/rubygems/ssl_certs/GlobalSignRootCA.pem:
+/opt/sensu/embedded/lib/ruby/2.3.0/rubygems/ssl_certs/GlobalSignRootCA.pem:
     file.managed:
       - source: salt://sensu/files/certs/GlobalSignRootCA.pem
       - require:

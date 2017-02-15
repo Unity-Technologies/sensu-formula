@@ -27,6 +27,7 @@ sensu:
   {% if grains['os_family'] == 'Windows' and sensu.pkg.use_chocolatey %}
   chocolatey.installed:
     - source: {{ sensu.pkg.chocolatey_repo }}
+    - version: {{ sensu.pkg.version }}
   {% else %}
   pkg:
     - installed
