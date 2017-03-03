@@ -126,7 +126,7 @@ install_{{ gem_name }}:
     {% endif %}
     - rdoc: False
     - ri: False
-    - proxy: {{ sensu.pkg.proxy }}
+    - proxy: {{ sensu.pkg.get('proxy') }}
 {% endfor %}
 
 {%- if salt['pillar.get']('sensu:checks') %}
