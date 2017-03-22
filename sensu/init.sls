@@ -11,7 +11,7 @@ sensu:
   pkgrepo.managed:
     - humanname: Sensu Repository
     {% if grains['os_family'] == 'Debian' %}
-    - name: deb http://repositories.sensuapp.org/apt sensu main
+    - name: deb http://repositories.sensuapp.org/apt sensu unstable
     - file: /etc/apt/sources.list.d/sensu.list
     - key_url: http://repositories.sensuapp.org/apt/pubkey.gpg
     {% elif grains['os_family'] == 'RedHat' %}
@@ -24,6 +24,7 @@ sensu:
   {% endif %}
   pkg:
     - installed
+    - version: 0.27.0-1
 
 
 {% if grains['os_family'] != 'Windows' %}
