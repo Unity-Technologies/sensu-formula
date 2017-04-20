@@ -3,7 +3,7 @@
   "checks": {
     "disk_check": {
       "handlers": ["default", "pagerduty", "slack"],
-      "command": "/opt/sensu/embedded/bin/check-disk-usage.rb -w 85 -c 90 -i /var/lib/ureadahead/debugfs/tracing",
+      "command": "/opt/sensu/embedded/bin/check-disk-usage.rb -w 85 -c 90 -p debug",
       "interval": 60,
       "occurrences": 5,
       "call_pagerduty": false,
