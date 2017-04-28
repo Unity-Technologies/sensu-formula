@@ -12,9 +12,10 @@ sensu:
   {% if repos.get('enabled') %}
   pkgrepo.managed:
     - humanname: Sensu Repository
-    {% if grains['os_family'] == 'Debian' %}
+    {%- if grains['os_family'] == 'Debian' %}
     - name: {{ repos.get('name') }}
     - file: /etc/apt/sources.list.d/sensu.list
+    - clean_file: true
     {%- if repos.get('key_url') %}
     - key_url: {{ repos.get('key_url') }}
     {%- endif %}
