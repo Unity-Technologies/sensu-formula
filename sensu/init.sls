@@ -8,6 +8,7 @@ python-apt:
       - pkgrepo: sensu
 sensu_var_run_dir:
   file.directory:
+    - name: /var/run/sensu
     - user: sensu
     - group: sensu
     - mode: 755
