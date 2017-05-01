@@ -6,6 +6,14 @@ python-apt:
     - installed
     - require_in:
       - pkgrepo: sensu
+sensu_var_run_dir:
+  file.directory:
+    - user: sensu
+    - group: sensu
+    - mode: 755
+    - makedirs: True
+    - require:
+      - pkg: sensu
 {% endif %}
 
 sensu:
