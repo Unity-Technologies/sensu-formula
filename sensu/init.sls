@@ -1,3 +1,4 @@
+{% from "sensu/pillar_map.jinja" import sensu with context %}
 {% from "sensu/repos_map.jinja" import repos with context -%}
 
 {% if grains['os_family'] == 'Debian' %}
@@ -36,8 +37,14 @@ sensu:
     - require_in:
       - pkg: sensu
   {% endif %}
+  {% if grains['os_family'] == 'Windows' and sensu.pkg.use_chocolatey %}
+  chocolatey.installed:
+    - source: {{ sensu.pkg.chocolatey_repo }}
+    - version: {{ sensu.pkg.version }}
+  {% else %}
   pkg:
     - installed
+  {% endif %}
 
 
 {% if grains['os_family'] != 'Windows' %}
