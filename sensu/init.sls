@@ -1,4 +1,5 @@
 {% from "sensu/pillar_map.jinja" import sensu with context %}
+{% from "sensu/repos_map.jinja" import repos with context -%}
 
 {% if grains['os_family'] == 'Debian' %}
 python-apt:
@@ -6,19 +7,31 @@ python-apt:
     - installed
     - require_in:
       - pkgrepo: sensu
+sensu_var_run_dir:
+  file.directory:
+    - name: /var/run/sensu
+    - user: sensu
+    - group: sensu
+    - mode: 755
+    - makedirs: True
+    - require:
+      - pkg: sensu
 {% endif %}
 
 sensu:
-  {% if grains['os_family'] != 'Windows' %}
+  {% if repos.get('enabled') %}
   pkgrepo.managed:
     - humanname: Sensu Repository
-    {% if grains['os_family'] == 'Debian' %}
-    - name: deb http://repositories.sensuapp.org/apt sensu main
+    {%- if grains['os_family'] == 'Debian' %}
+    - name: {{ repos.get('name') }}
     - file: /etc/apt/sources.list.d/sensu.list
-    - key_url: http://repositories.sensuapp.org/apt/pubkey.gpg
-    {% elif grains['os_family'] == 'RedHat' %}
-    - baseurl: http://repositories.sensuapp.org/yum/el/$releasever/$basearch/
-    - gpgcheck: 0
+    - clean_file: true
+    {%- if repos.get('key_url') %}
+    - key_url: {{ repos.get('key_url') }}
+    {%- endif %}
+    {%- elif grains['os_family'] == 'RedHat' %}
+    - baseurl: {{ repos.get('baseurl') }}
+    - gpgcheck: {{ repos.get('gpgcheck') }}
     - enabled: 1
     {% endif %}
     - require_in:
