@@ -16,6 +16,11 @@
           "notify_resolve": false
         } 
       }
+    },
+    "state_change_only": {
+      "attributes": {
+        "occurrences": "eval: value == 1 || :::action::: == :resolve"
+      }
     }
   }
 }
