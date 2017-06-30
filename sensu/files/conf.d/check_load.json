@@ -5,7 +5,8 @@
       "handlers": ["default", "pagerduty", "slack" ],
       "command": "/opt/sensu/embedded/bin/check-load.rb -w 10,20,30 -c 25,50,75",
       "interval": 60,
-      "occurrences": 5,
+      "occurrences": 3,
+      "refresh": 300,
       "call_pagerduty": false,
       "subscribers": [ "all" ]
     },
