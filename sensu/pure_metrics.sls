@@ -9,8 +9,8 @@ Install python libs:
     - pkgs:
       - click
       - purestorage
-      - watch_in:
-        - service: sensu-server
+    - watch_in:
+      - service: sensu-server
 
 /opt/sensu/embedded/bin/metrics-pure-storage.py:
   file.managed:
