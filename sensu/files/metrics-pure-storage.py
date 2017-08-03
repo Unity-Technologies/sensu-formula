@@ -16,7 +16,6 @@ NOTE(s):
 """
 
 from time import time
-import click
 import purestorage
 
 # we'll use one epoch timestamp for each run of this script
@@ -50,7 +49,7 @@ class Array(object):
         self.info.update(_perf_metrics[0])
         self.percent_used = Metric(int(100 * self.info['total'] / self.info['capacity']), 'percent_used')
         self.system_space = Metric(self.info['system'] / 1024 / 1024 / 1024, 'system_space')  # in GBs
-        self.percent_system_space = Metric((100 * (self.info['system'] / self.info['capacity'])), 'percent_system_space')
+        self.percent_system_space = Metric((100 * (self.info['system'] / float(self.info['capacity']))), 'percent_system_space')
         self.writes_per_sec = Metric(self.info['writes_per_sec'], 'writes_per_sec')
         self.reads_per_sec = Metric(self.info['reads_per_sec'], 'reads_per_sec')
         self.usec_per_write = Metric(self.info['usec_per_write_op'], 'usec_per_write')
