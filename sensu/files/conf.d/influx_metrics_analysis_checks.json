@@ -3,7 +3,7 @@
   "checks": {
     "pure2_percent_system_space": {
       "handlers": ["default", "pagerduty", "slack" ],
-      "command": "/opt/sensu/embedded/bin/check-influxdb-query.rb --host staging-sensudb-01-dub.bf.unity3d.com --database sensu --query 'select mean("value") from "PS2-MS-D-53.array.percent_system_space" where time > now() - 30m;' --alias "PURE2_percent_system_space" --warning 'value >= 10' --critical 'value >= 15' --jsonpath '.[0].values[0].mean'",
+      "command": "/opt/sensu/embedded/bin/check-influxdb-query.rb --host sensudb-01-dub.bf.unity3d.com --database sensu --query 'select mean("value") from "PS2-MS-D-53.array.percent_system_space" where time > now() - 30m;' --alias "PURE2_percent_system_space" --warning 'value >= 10' --critical 'value >= 15' --jsonpath '.[0].values[0].mean'",
       "interval": 60,
       "occurrences": 1,
       "call_pagerduty": false,
@@ -11,7 +11,7 @@
     },
     "pure1_percent_system_space": {
       "handlers": ["default", "pagerduty", "slack" ],
-      "command": "/opt/sensu/embedded/bin/check-influxdb-query.rb --host staging-sensudb-01-dub.bf.unity3d.com --database sensu --query 'select mean("value") from "PS2-MS-D-53.array.percent_system_space" where time > now() - 30m;' --alias "PURE2_percent_system_space" --warning 'value >= 10' --critical 'value >= 15' --jsonpath '.[0].values[0].mean'",
+      "command": "/opt/sensu/embedded/bin/check-influxdb-query.rb --host sensudb-01-dub.bf.unity3d.com --database sensu --query 'select mean("value") from "PS1-MS-D-53.array.percent_system_space" where time > now() - 30m;' --alias "PURE2_percent_system_space" --warning 'value >= 10' --critical 'value >= 15' --jsonpath '.[0].values[0].mean'",
       "occurrences": 1,
       "interval": 60,
       "call_pagerduty": false,
