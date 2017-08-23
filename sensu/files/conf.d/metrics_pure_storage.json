@@ -3,7 +3,7 @@
     "pure_storage_metrics": {
       "type": "metric",
       "command": "/opt/sensu/embedded/bin/metrics-pure-storage.py",
-      "handlers": [ "metrics" ],
+      "handlers": [ "metrics", "stackstorm" ],
       "interval": 60,
       "time_precision": "s",
       "subscribers": [ "pure_storage_monitor" ]
