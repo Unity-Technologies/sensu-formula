@@ -1,0 +1,13 @@
+{% from "sensu/service_map.jinja" import services with context -%}
+{
+  "checks": {
+    "zookeeper_ruok": {
+      "handlers": ["default", "pagerduty", "slack" ],
+      "command": "/opt/sensu/embedded/bin/check-zookeeper-ruok.rb -s localhost -p 2181",
+      "interval": 60,
+      "occurrences": 5,
+      "call_pagerduty": false,
+      "subscribers": [ "zookeeper" ]
+    }
+  }
+}
